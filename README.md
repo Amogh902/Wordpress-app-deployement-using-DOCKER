@@ -47,6 +47,8 @@ docker run -d --name mydb \
 
  **Note:** The `-e MYSQL_ROOT_PASSWORD` flag is **mandatory**. If it’s not set, the MySQL container will be created but exit immediately.
 
+![](/WP-ap-docker-img/wp-mysql-img.png)
+
 ### Step 3: Run WordPress container
 
 ```bash
@@ -58,12 +60,23 @@ docker run -d --name wordpressapp -p 80:80 \
   --link mydb:mysql \
   wordpress
 ```
+## About --link:
+
+* The --link flag allows containers to communicate with each other by creating a secure tunnel between them. In this case:
+wordpressapp container can directly talk to mydb using the alias mysql.
+
+* It automatically injects environment variables into the WordPress container, making it aware of the MySQL container's IP and ports.
+
+* Although --link works, it is considered legacy. Today, Docker networks are preferred for container-to-container communication. But for quick setups, --link is simple and effective
+
+![](/WP-ap-docker-img/wp-wordpress-img'.png)
 
 ### Step 4: Verify containers
 
 ```bash
 docker ps
 ```
+![](/WP-ap-docker-img/wp-docker-ps-img.png)
 
 You should see both **`mydb`** and **`wordpressapp`** containers running.
 
@@ -72,6 +85,10 @@ You should see both **`mydb`** and **`wordpressapp`** containers running.
 Open a browser → `http://<EC2-Public-IP>` → Complete the WordPress setup → Login to the dashboard.
 
  **Result:** Entire application ready in minutes with zero manual configuration.
+
+ ![](/WP-ap-docker-img/wp-public-ip-img.png)
+
+ ![](/WP-ap-docker-img/WP-dashboard.png)
 
 ---
 
@@ -83,6 +100,8 @@ Both the mysql and wordpress images were directly pulled from Docker Hub, which 
 * Images are maintained and updated by the community and vendors.
 * Using trusted images ensures reliability and faster deployments.
 * This shows how Docker Hub makes it easy to reuse and share software components.
+
+![](/WP-ap-docker-img/wp-dockerhub-img.png)
 
 ---
 

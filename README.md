@@ -75,6 +75,17 @@ Open a browser → `http://<EC2-Public-IP>` → Complete the WordPress setup →
 
 ---
 
+## Role of Docker Hub
+
+Both the mysql and wordpress images were directly pulled from Docker Hub, which is Docker’s central registry for container images.
+
+* It eliminates the need to build everything from scratch.
+* Images are maintained and updated by the community and vendors.
+* Using trusted images ensures reliability and faster deployments.
+* This shows how Docker Hub makes it easy to reuse and share software components.
+
+---
+
 ##  Conclusion
 
 What once took multiple manual steps can now be achieved with **two Docker commands**. Docker brings **speed, portability, and reliability** to deployments, making it a game-changer for developers and DevOps engineers alike.
